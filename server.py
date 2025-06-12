@@ -1,11 +1,14 @@
 from fastapi import FastAPI, UploadFile, File
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
-from audio_transcriber import transcribe_audio
 import shutil
 
-app = FastAPI()
+from audio_transcriber import transcribe_audio
+from pdfgen import generate_pdf
+from qsgen import generate_qs
+from res import resource_pdf_gen
 
+app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/", response_class=HTMLResponse)
@@ -21,13 +24,28 @@ async def read_results():
 @app.post("/upload-audio")
 async def upload_audio(file: UploadFile = File(...)):
     temp_path = f"temp_{file.filename}"
+    
+    # Save the uploaded file
     with open(temp_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
     print("✅ File received")
 
-    transcription = transcribe_audio(temp_path)
+    # Step 1: Transcribe
+    transcript = transcribe_audio(temp_path)
     print("✅ Transcription done")
 
-    return {"message": "Audio uploaded and processing started"}
+    # Step 2: Generate PDF
+    title = generate_pdf(transcript)
+    print("✅ PDF done")
 
+    # Step 3: Generate Questions
+    generate_qs(transcript)
+    print("✅ Questions done")
+
+    # Step 4: Generate Resources
+    resource_pdf_gen(title)
+    print("✅ Resources done")
+
+    # Step 5: Redirect to results
+    return RedirectResponse(url="/results", status_code=303)

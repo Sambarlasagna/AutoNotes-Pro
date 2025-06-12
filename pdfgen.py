@@ -1,6 +1,5 @@
 from fpdf import FPDF
 import google.generativeai as genai
-from res import resource_pdf_gen
 import time
 import os
 
@@ -104,9 +103,10 @@ def generate_pdf(transcript_text):
 
         pdf.output(output_file)
         print("✅ Saved as notes.pdf")
+        return title
 
     text_to_pdf(notes)
-    resource_pdf_gen(title)
+
 
 # Run
 if __name__ == "__main__":
