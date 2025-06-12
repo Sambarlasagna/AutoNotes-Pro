@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoNotes Pro - Results</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: #6b7280;
+            font-size: 1rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .success-icon {
+            width: 64px;
+            height: 64px;
+            color: #10b981;
+            margin: 0 auto 1rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #059669;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .info-section {
+            background: #f9fafb;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-section h3 {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-list {
+            list-style: none;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .info-list li {
+            margin-bottom: 0.25rem;
+        }
+
+        .info-list strong {
+            color: #374151;
+        }
+
+        .status-success {
+            color: #059669;
+        }
+
+        .preview-section {
+            background: #eff6ff;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .preview-section h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+        }
+
+        .preview-list {
+            list-style: none;
+            font-size: 0.875rem;
+            color: #1e40af;
+        }
+
+        .preview-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 0.5rem;
+        }
+
+        .preview-list li:before {
+            content: "•";
+            margin-right: 0.5rem;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .btn-outline {
+            background: white;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-outline:hover {
+            background: #f9fafb;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AutoNotes Pro</h1>
+            <p>Your audio has been processed successfully!</p>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <svg class="success-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 12l2 2 4-4"></path>
+                    <circle cx="12" cy="12" r="10"></circle>
+                </svg>
+                <div class="card-title">Processing Complete!</div>
+                <div class="card-description">Your audio file has been successfully converted to notes</div>
+            </div>
+            <div class="card-content">
+                <div class="info-section">
+                    <h3>File Details:</h3>
+                    <ul class="info-list">
+                        <li><strong>File Name:</strong> <span id="displayFileName">Unknown file</span></li>
+                        <li><strong>File Size:</strong> <span id="displayFileSize">0 MB</span></li>
+                        <li><strong>Status:</strong> <span class="status-success">Successfully Processed</span></li>
+                    </ul>
+                </div>
+
+                <div class="preview-section">
+                    <h3>
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14,2 14,8 20,8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10,9 9,9 8,9"></polyline>
+                        </svg>
+                        Generated Notes Preview:
+                    </h3>
+                    <ul class="preview-list">
+                        <li>Key topics and themes identified</li>
+                        <li>Important timestamps marked</li>
+                        <li>Action items extracted</li>
+                        <li>Summary and conclusions generated</li>
+                    </ul>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn btn-outline" onclick="goBack()">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15,18 9,12 15,6"></polyline>
+                        </svg>
+                        Upload Another File
+                    </button>
+                    <button class="btn btn-primary" onclick="downloadNotes()">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7,10 12,15 17,10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download Notes
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-text">
+            <p>Your notes are ready for download and have been saved to your account.</p>
+        </div>
+    </div>
+
+    <script>
+        // Load file info from localStorage
+        const fileData = localStorage.getItem('uploadedFile');
+        
+        if (fileData) {
+            const file = JSON.parse(fileData);
+            document.getElementById('displayFileName').textContent = file.name;
+            document.getElementById('displayFileSize').textContent = (file.size / 1024 / 1024).toFixed(2) + ' MB';
+        }
+
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+
+        function downloadNotes() {
+            // Simulate download
+            alert('Notes downloaded successfully!');
+        }
+
+        // Clear localStorage after displaying
+        localStorage.removeItem('uploadedFile');
+    </script>
+</body>
+</html>
