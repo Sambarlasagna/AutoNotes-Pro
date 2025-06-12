@@ -23,7 +23,7 @@
 
         .container {
             width: 100%;
-            max-width: 600px;
+            max-width: 700px;
         }
 
         .header {
@@ -79,79 +79,152 @@
             padding: 1.5rem;
         }
 
-        .info-section {
-            background: #f9fafb;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-        }
-
-        .info-section h3 {
-            font-weight: 600;
-            color: #1f2937;
-            margin-bottom: 0.5rem;
-        }
-
-        .info-list {
-            list-style: none;
-            font-size: 0.875rem;
-            color: #6b7280;
-        }
-
-        .info-list li {
-            margin-bottom: 0.25rem;
-        }
-
-        .info-list strong {
-            color: #374151;
-        }
-
         .status-success {
             color: #059669;
         }
 
-        .preview-section {
-            background: #eff6ff;
-            padding: 1rem;
-            border-radius: 8px;
+        .downloads-section {
             margin-bottom: 1.5rem;
         }
 
-        .preview-section h3 {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .downloads-title {
+            font-size: 1.125rem;
             font-weight: 600;
-            color: #1e40af;
-            margin-bottom: 0.5rem;
+            color: #1f2937;
+            margin-bottom: 1rem;
+            text-align: center;
         }
 
-        .preview-list {
-            list-style: none;
-            font-size: 0.875rem;
-            color: #1e40af;
+        .pdf-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
         }
 
-        .preview-list li {
-            margin-bottom: 0.5rem;
-            padding-left: 0.5rem;
-        }
-
-        .preview-list li:before {
-            content: "•";
-            margin-right: 0.5rem;
-        }
-
-        .button-group {
+        .pdf-btn {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem 1rem;
+            text-decoration: none;
+            color: #374151;
+            transition: all 0.3s ease;
             display: flex;
+            flex-direction: column;
+            align-items: center;
             gap: 0.75rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
 
-        .btn {
-            flex: 1;
+        .pdf-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            border-color: #3b82f6;
+        }
+
+        .pdf-btn:active {
+            transform: translateY(0);
+        }
+
+        .pdf-btn.notes {
+            border-color: #3b82f6;
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        }
+
+        .pdf-btn.notes:hover {
+            border-color: #2563eb;
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+        }
+
+        .pdf-btn.questionnaire {
+            border-color: #10b981;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+        }
+
+        .pdf-btn.questionnaire:hover {
+            border-color: #059669;
+            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+        }
+
+        .pdf-btn.resources {
+            border-color: #f59e0b;
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+        }
+
+        .pdf-btn.resources:hover {
+            border-color: #d97706;
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        }
+
+        .pdf-btn.loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .pdf-btn.loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .pdf-icon {
+            width: 48px;
+            height: 48px;
+            opacity: 0.8;
+        }
+
+        .pdf-btn.notes .pdf-icon {
+            color: #3b82f6;
+        }
+
+        .pdf-btn.questionnaire .pdf-icon {
+            color: #10b981;
+        }
+
+        .pdf-btn.resources .pdf-icon {
+            color: #f59e0b;
+        }
+
+        .pdf-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .pdf-description {
+            font-size: 0.875rem;
+            text-align: center;
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+
+        .navigation-section {
+            border-top: 1px solid #f3f4f6;
+            padding-top: 1.5rem;
+        }
+
+        .nav-btn {
+            width: 100%;
             padding: 0.75rem 1rem;
-            border: none;
+            border: 1px solid #d1d5db;
             border-radius: 8px;
+            background: white;
+            color: #374151;
             font-size: 1rem;
             font-weight: 500;
             cursor: pointer;
@@ -163,23 +236,9 @@
             text-decoration: none;
         }
 
-        .btn-outline {
-            background: white;
-            color: #374151;
-            border: 1px solid #d1d5db;
-        }
-
-        .btn-outline:hover {
+        .nav-btn:hover {
             background: #f9fafb;
-        }
-
-        .btn-primary {
-            background: #3b82f6;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #2563eb;
+            border-color: #9ca3af;
         }
 
         .footer-text {
@@ -193,6 +252,21 @@
             width: 20px;
             height: 20px;
             fill: currentColor;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            .pdf-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                max-width: 100%;
+            }
         }
     </style>
 </head>
@@ -213,55 +287,56 @@
                 <div class="card-description">Your audio file has been successfully converted to notes</div>
             </div>
             <div class="card-content">
-                <div class="info-section">
-                    <h3>File Details:</h3>
-                    <ul class="info-list">
-                        <li><strong>File Name:</strong> <span id="displayFileName">Unknown file</span></li>
-                        <li><strong>File Size:</strong> <span id="displayFileSize">0 MB</span></li>
-                        <li><strong>Status:</strong> <span class="status-success">Successfully Processed</span></li>
-                    </ul>
+                <div class="downloads-section">
+
+                    <h3 class="downloads-title">📄 Your Generated Documents</h3>
+                    <div class="pdf-buttons">
+                        <a href="notes.pdf" target="_blank" class="pdf-btn notes" onclick="handlePdfClick(this, 'Notes')">
+                            <svg class="pdf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                <polyline points="14,2 14,8 20,8"></polyline>
+                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                <polyline points="10,9 9,9 8,9"></polyline>
+                            </svg>
+                            <div class="pdf-title">📝 Notes</div>
+                            <div class="pdf-description">Comprehensive notes extracted from your audio with key points and summaries</div>
+                        </a>
+
+                        <a href="questionnaire.pdf" target="_blank" class="pdf-btn questionnaire" onclick="handlePdfClick(this, 'Questionnaire')">
+                            <svg class="pdf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                            </svg>
+                            <div class="pdf-title">❓ Questionnaire</div>
+                            <div class="pdf-description">Interactive questions and exercises based on your audio content</div>
+                        </a>
+
+                        <a href="resources.pdf" target="_blank" class="pdf-btn resources" onclick="handlePdfClick(this, 'Resources')">
+                            <svg class="pdf-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                            </svg>
+                            <div class="pdf-title">📚 Resources</div>
+                            <div class="pdf-description">Additional learning materials and references related to your content</div>
+                        </a>
+                    </div>
                 </div>
 
-                <div class="preview-section">
-                    <h3>
-                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                            <polyline points="14,2 14,8 20,8"></polyline>
-                            <line x1="16" y1="13" x2="8" y2="13"></line>
-                            <line x1="16" y1="17" x2="8" y2="17"></line>
-                            <polyline points="10,9 9,9 8,9"></polyline>
-                        </svg>
-                        Generated Notes Preview:
-                    </h3>
-                    <ul class="preview-list">
-                        <li>Key topics and themes identified</li>
-                        <li>Important timestamps marked</li>
-                        <li>Action items extracted</li>
-                        <li>Summary and conclusions generated</li>
-                    </ul>
-                </div>
-
-                <div class="button-group">
-                    <button class="btn btn-outline" onclick="goBack()">
+                <div class="navigation-section">
+                    <button class="nav-btn" onclick="goBack()">
                         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="15,18 9,12 15,6"></polyline>
                         </svg>
-                        Upload Another File
-                    </button>
-                    <button class="btn btn-primary" onclick="downloadNotes()">
-                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7,10 12,15 17,10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                        Download Notes
+                        Upload Another Audio File
                     </button>
                 </div>
             </div>
         </div>
 
         <div class="footer-text">
-            <p>Your notes are ready for download and have been saved to your account.</p>
+            <p>💡 Tip: Right-click on any document button to download instead of viewing</p>
         </div>
     </div>
 
@@ -279,10 +354,39 @@
             window.location.href = 'index.html';
         }
 
-        function downloadNotes() {
-            // Simulate download
-            alert('Notes downloaded successfully!');
+        function handlePdfClick(button, documentType) {
+            // Add loading state
+            button.classList.add('loading');
+            
+            // Remove loading state after a short delay
+            setTimeout(() => {
+                button.classList.remove('loading');
+            }, 1000);
+
+            // Optional: Track which document was accessed
+            console.log(`${documentType} document accessed`);
+            
+            // You can add analytics or other tracking here
+            // Example: trackDocumentAccess(documentType);
         }
+
+        // Optional: Function to handle PDF loading errors
+        window.addEventListener('error', function(e) {
+            if (e.target.tagName === 'A' && e.target.href.endsWith('.pdf')) {
+                alert('PDF file not found. Please make sure the PDF files are in the same folder as this HTML file.');
+            }
+        });
+
+        // Add some interactive feedback
+        document.querySelectorAll('.pdf-btn').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.02)';
+            });
+            
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
 
         // Clear localStorage after displaying
         localStorage.removeItem('uploadedFile');

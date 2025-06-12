@@ -1,10 +1,12 @@
-# audio_transcriber.py
 from faster_whisper import WhisperModel
-from ollama import Client
-from fpdf import FPDF
 import time
+from pdfgen import generate_pdf  
+from pdfgen import generate_qs
 
-# Load model once
+# ✅ Configure Gemini
+genai.configure(api_key="AIza...")  # Replace with your actual key
+
+# Load Whisper model
 model = WhisperModel("medium", device="cuda", compute_type="float16")
 
 def text_to_pdf(text, output_file='notes.pdf'):
@@ -14,45 +16,20 @@ def text_to_pdf(text, output_file='notes.pdf'):
     pdf.set_font("Arial", size=12)
 
     for line in text.split('\n'):
-        if line.strip() == "":
-            pdf.ln()
-        else:
-            pdf.multi_cell(0, 10, line)
+        pdf.multi_cell(0, 10, line.strip() or " ")
 
     pdf.output(output_file)
 
 def transcribe_audio(file_path):
-    print("[INFO] Starting transcription...")
     start = time.time()
+    segments, info = model.transcribe(file_path, beam_size=5)
+    transcript_text = " ".join([seg.text for seg in segments])
+    print(f"🕒 Transcription took {time.time() - start:.2f} seconds")
 
-    segments, info = model.transcribe(file_path)
-    transcript_text = ""
-    for segment in segments:
-        transcript_text += f"{segment.text.strip()}\n"
+    # 💾 Save transcript to file
+    with open("transcript.txt", "w", encoding="utf-8") as f:
+        f.write(transcript_text)
+    print("✅ Transcript saved to transcript.txt")
 
-    end = time.time()
-    print(f"[INFO] Transcription took {end - start:.2f} seconds")
-
-    print("[INFO] Sending transcript to Ollama...")
-    start = time.time()
-
-    client = Client(host='http://localhost:11434')
-    response = client.chat(
-        model='llama3',
-        messages=[
-            {"role": "system", "content": "You are an expert at converting transcripts into structured study notes."},
-            {"role": "user", "content": "Convert the following transcript into clean notes with headings and bullet points:\n\n" + transcript_text}
-        ]
-    )
-
-    end = time.time()
-    print(f"[INFO] Chat response took {end - start:.2f} seconds")
-
-    notes = response['message']['content']
-    print("[INFO] Notes generated successfully.")
-
-    text_to_pdf(notes, 'notes.pdf')
-    print("[INFO] Notes saved to notes.pdf")
-
-# Example usage:
-# transcribe_audio("temp_thermodynamics_1hr.mp3")
+    generate_pdf(transcript_text) # Importing from pdfgen module
+    generate_qs(transcript_text) # Importing from pdfgen module

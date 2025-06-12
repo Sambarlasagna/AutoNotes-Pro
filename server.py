@@ -29,4 +29,5 @@ async def upload_audio(file: UploadFile = File(...)):
     transcription = transcribe_audio(temp_path)
     print("✅ Transcription done")
 
-    return {"transcription": transcription}
+    return {"message": "Audio uploaded and processing started"}
+
