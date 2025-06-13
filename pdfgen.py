@@ -62,7 +62,7 @@ def generate_pdf(transcript_text):
     print(f"🕒 Notes generated in {time.time() - start:.2f} seconds")
     notes = response.text
 
-    def text_to_pdf(text, output_file='notes.pdf'):
+    def text_to_pdf(text, output_file='static/notes.pdf'):
         pdf = StyledPDF()
         pdf.add_page()
 
@@ -105,7 +105,8 @@ def generate_pdf(transcript_text):
         print("✅ Saved as notes.pdf")
         return title
 
-    text_to_pdf(notes)
+    title = text_to_pdf(notes)
+    return title
 
 
 # Run

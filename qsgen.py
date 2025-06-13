@@ -50,7 +50,7 @@ def generate_qs(transcript_text):
     print(f"🕒 Questions generated in {time.time() - start:.2f} seconds")
     questionnaire = response.text
 
-    def text_to_pdf(text, output_file='questionnaire.pdf'):
+    def text_to_pdf(text, output_file='static/questionnaire.pdf'):
         pdf = StyledPDF()
         pdf.add_page()
 

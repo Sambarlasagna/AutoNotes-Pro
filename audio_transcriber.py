@@ -16,9 +16,10 @@ def transcribe_audio(file_path):
     print(f"🕒 Transcription took {time.time() - start:.2f} seconds")
 
     # 💾 Save transcript to file
-    with open("transcript.txt", "w", encoding="utf-8") as f:
+    with open("static/transcript.txt", "w", encoding="utf-8") as f:
         f.write(transcript_text)
     print("✅ Transcript saved to transcript.txt")
+    return transcript_text
 
     # generate_pdf(transcript_text) # Importing from pdfgen module
     # generate_qs(transcript_text) # Importing from pdfgen module

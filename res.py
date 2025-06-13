@@ -29,7 +29,7 @@ def resource_pdf_gen(topic_title):
             print("❌ YouTube API Error:", response.text)
         return videos
 
-    def generate_resources_pdf(output_file="resources.pdf"):
+    def generate_resources_pdf(output_file="static/resources.pdf"):
         pdf = FPDF()
         pdf.add_font("DejaVu", "", font_path_regular, uni=True)
         pdf.add_font("DejaVu", "B", font_path_bold, uni=True)
