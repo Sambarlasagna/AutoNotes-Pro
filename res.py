@@ -2,7 +2,8 @@ from fpdf import FPDF
 import requests
 
 def resource_pdf_gen(topic_title):
-    YOUTUBE_API_KEY = "AIzaSyCbhHnkICHDeGUU684rzHiClzHStrwI3T0"
+    # Enter your YouTube API Key here
+    YOUTUBE_API_KEY = "API_KEY_HERE"
 
     font_path_regular = "DejaVuSans.ttf"
     font_path_bold = "DejaVuSans-Bold.ttf"
