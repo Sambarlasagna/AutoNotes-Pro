@@ -52,6 +52,10 @@ def generate_pdf(transcript_text):
         "- Paragraphs only when needed\n"
         "- Do NOT use Markdown formatting like # or **\n\n"
         "If there is not enough information in the transcript, use your own knowledge to elaborate and fill in the gaps, "
+        "Ensure the notes are highly formal, academic, and free from any casual, spoken, or lecture-style commentary such as "
+        "'you know', 'uh', or any filler or informal expressions used by the lecturer.\n"
+        "Rephrase everything into a polished, professional tone suitable for academic reference.\n\n"
+        "If there is not enough information in the transcript, use your own knowledge to elaborate and fill in the gaps, "
         "ensuring the notes look complete, well-structured, and comprehensive for later studying.\n\n"
         "Transcript:\n"
         + transcript_text
@@ -64,11 +68,13 @@ def generate_pdf(transcript_text):
 
     def text_to_pdf(text, output_file='static/notes.pdf'):
         pdf = StyledPDF()
-        pdf.add_page()
 
         # Load fonts
         font_path_regular = "DejaVuSans.ttf"
         font_path_bold = "DejaVuSans-Bold.ttf"
+
+        pdf.add_page()
+
 
         if not os.path.exists(font_path_regular) or not os.path.exists(font_path_bold):
             raise FileNotFoundError("❌ Font files not found in project directory.")
@@ -82,10 +88,20 @@ def generate_pdf(transcript_text):
         # Detect title
         title = ""
         for i, line in enumerate(lines):
-            if line.strip().isupper() and len(line.strip().split()) <= 12:
-                title = line.strip()
-                lines = lines[i + 1:]  # skip title line
+            stripped = line.strip()
+            if stripped.isupper() and len(stripped.split()) <= 12:
+                title = stripped
+                lines = lines[i + 1:]
                 break
+            
+        # fallback
+        if not title:
+            for i, line in enumerate(lines):
+                stripped = line.strip()
+                if stripped:
+                    title = stripped
+                    lines = lines[i + 1:]
+                    break
 
         if title:
             pdf.write_title(title)

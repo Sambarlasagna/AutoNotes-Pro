@@ -28,6 +28,7 @@ async def upload_audio(file: UploadFile = File(...)):
 
     print("✅ File received")
 
+
     # Transcribe and generate all outputs
     # transcript = transcribe_audio(temp_path)
     # print("✅ Transcription done")
@@ -46,29 +47,21 @@ async def upload_audio(file: UploadFile = File(...)):
     # Clean up temp file
     os.remove(temp_path)
 
-    if os.path.exists("DejavuSans.pkl"):
-        os.remove("DejavuSans.pkl")
-        print(f"Deleted DejavuSans.pkl file")
-    else:
-        print("File does not exist")
+    #deleting cache files to avoid errors in future runs
+    files_to_delete = [
+        "DejavuSans.pkl",
+        "DejavuSans.cw127.pkl",
+        "DejavuSans-Bold.pkl",
+        "DejavuSans-Bold.cw127.pkl"
+    ]
 
-    if os.path.exists("DejavuSans.cw127.pkl"):
-        os.remove("DejavuSans.cw127.pkl")
-        print(f"Deleted DejavuSans.cw127pkl file")
-    else:
-        print("File does not exist")
+    for file in files_to_delete:
+        try:
+            os.remove(file)
+            print(f"Deleted {file}")
+        except FileNotFoundError:
+            print(f"{file} does not exist")
 
-    if os.path.exists("DejavuSans-Bold.pkl"):
-        os.remove("DejavuSans-Bold.pkl")
-        print(f"Deleted DejavuSans-Bold.pkl file")
-    else:
-        print("File does not exist")
-
-    if os.path.exists("DejavuSans-Bold.cw127.pkl"):
-        os.remove("DejavuSans.cw127.pkl")
-        print(f"Deleted DejavuSans.cw127 file")
-    else:
-        print("File does not exist")
 
     return {"status": "done", "redirect": "/static/results.html"}
 
