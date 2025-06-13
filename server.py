@@ -30,10 +30,9 @@ async def upload_audio(file: UploadFile = File(...)):
 
 
     # Transcribe and generate all outputs
-    # transcript = transcribe_audio(temp_path)
-    # print("✅ Transcription done")
-    with open("static/transcript.txt", "r") as f:
-        transcript = f.read()
+    transcript = transcribe_audio(temp_path)
+    print("✅ Transcription done")
+
 
     title = generate_pdf(transcript)
     print("✅ PDF done")
