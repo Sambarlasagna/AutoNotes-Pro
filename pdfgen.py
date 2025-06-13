@@ -40,7 +40,8 @@ class StyledPDF(FPDF):
         self.multi_cell(0, 8, line)
 
 def generate_pdf(transcript_text):
-    genai.configure(api_key="AIzaSyCx8OXiJGXD5I8owQ2wQP-sSwA_1pYR2fQ")
+    #Enter your Google Gemini API key here
+    genai.configure(api_key="Your_API_Key_Here")  # Replace with your actual key)
     gemini_model = genai.GenerativeModel("models/gemini-2.5-flash-preview-05-20")
 
     prompt = (
