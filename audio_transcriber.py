@@ -1,9 +1,5 @@
 from faster_whisper import WhisperModel
 import time
-import google.generativeai as genai
-
-# ✅ Configure Gemini
-genai.configure(api_key="AIza...")  # Replace with your actual key
 
 # Load Whisper model
 model = WhisperModel("medium", device="cuda", compute_type="float16")
